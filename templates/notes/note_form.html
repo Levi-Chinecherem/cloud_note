@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load form_tags %}
+
+{% block title %}{% if form.instance.pk %}Edit Note{% else %}Create Note{% endif %}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">{% if form.instance.pk %}Edit Note{% else %}Create Note{% endif %}</h3>
+        </div>
+        <div class="border-t border-gray-200">
+            <form method="post" class="px-4 py-5 sm:p-6">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                    <div class="sm:col-span-2">
+                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                        <div class="mt-1">
+                            {{ form.title|add_class:"block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" }}
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                        <div class="mt-1">
+                            {{ form.content|add_class:"block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" }}
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 flex justify-end">
+                    <a href="{% url 'note_list' %}" class="mr-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Cancel</a>
+                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
